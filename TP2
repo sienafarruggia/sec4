@@ -1,0 +1,31 @@
+import random
+nombre_essai = 1 #used to count the number of tries from user before finding the number
+yes_no = 'yes' #used to ask user if they want to play again
+
+while yes_no == "yes": #loop to restart game
+    x = random.randrange(0, 1000)
+    #print(x)   #used for testing
+    print("j'ai chosi un nombre au harard entre 0 et 1000. \nÀ vous de le deviner...")
+
+    users_number = int(input("Entrez votre essai: "))
+    while users_number != x: #loop to keep allowing user to guess
+
+        if users_number < x: #used to tell user if their guess is too small
+            nombre_essai = nombre_essai + 1
+            print("Mauvais choix, le nombre est plus grand que", users_number)
+
+        elif users_number > x: #used to tell user if their guess is too big
+            nombre_essai = nombre_essai + 1
+            print("Mauvais choix, le nombre est plus petit que", users_number)
+
+        users_number = int(input("Entrez votre essai: "))
+
+    else: #used to tell user if they are correct
+        print("Bravo! Bonne réponse\nVous avez réussi en :",nombre_essai)
+
+    yes_no = str(input("Voulez-vous faire une autre partie? (yes or no)")) #used to ask user if they wish to play again
+    if yes_no == "yes":
+        print("ok")
+
+    elif yes_no == "no":
+        print("Merci et au revoir")
