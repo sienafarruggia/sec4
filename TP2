@@ -2,10 +2,15 @@ import random
 nombre_essai = 1 #used to count the number of tries from user before finding the number
 yes_no = 'yes' #used to ask user if they want to play again
 
+user_min = int(input("Entrez votre minimum: "))
+user_max = int(input("Entrez votre maximum: "))
+
 while yes_no == "yes": #loop to restart game
-    x = random.randrange(0, 1000)
+    x = random.randrange(user_min,user_max)
     #print(x)   #used for testing
-    print("j'ai chosi un nombre au harard entre 0 et 1000. \nÀ vous de le deviner...")
+
+
+    print("j'ai chosi un nombre au harard entre", user_min ,"et", user_max,". \nÀ vous de le deviner...")
 
     users_number = int(input("Entrez votre essai: "))
     while users_number != x: #loop to keep allowing user to guess
