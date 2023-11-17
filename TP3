@@ -1,18 +1,9 @@
 import random
 
+#la réponse a la question est: Il faudrait diminuer le "random.randrange" de la force de l'adversaire et ajouter des variables avec la même fonction pour ajouter des monstre et augmenter le "random.randrange" des dés afin que la sommes des monstres sois possible a combattre.
+
 #les variable
 niveau_vie = 20
-
-force_adversaire1 = random.randrange (2,12)
-force_adversaire2 = random.randrange (2,12)
-force_adversaire3 = random.randrange (2,12)
-force_adversaire_finale = (force_adversaire1 + force_adversaire2 + force_adversaire3)//3
-force_adversaire_boss = random.randrange (6,16)
-
-score_dé = random.randrange (1,6)
-score_dé2 = random.randrange (1,6)
-score_dé_finale = score_dé + score_dé2
-
 numero_adversaire = 1
 numero_combat = 1
 nombre_victoires = 0
@@ -23,23 +14,29 @@ combat_statut = 0
 
 #loop (intro du jeu)
 while users_choix != 4 and niveau_vie > 0:
+    force_adversaire = random.randrange(2, 12)
+    force_adversaire_boss = random.randrange(6, 16)
+
     if nombre_victoires_consecutives == 3:
         force_adversaire1 = force_adversaire_boss
     print("\n________________________________________________________________________________________________________________________________________________________________________________________________")
-    print("Vous tombez face à face avec des adversaires de difficulté :",force_adversaire1,",",force_adversaire2,"et",force_adversaire3,"\navec une force moyenne de :",force_adversaire_finale,)
-    print("\nQue voulez-vous faire ? \n1- Combattre ces adversaires\n2- Contourner ces adversaires et aller ouvrir une autre porte\n3- Afficher les règles du jeu\n4- Quitter la partie")
+    print("Vous tombez face à face avec un adversaires de difficulté :",force_adversaire)
+    print("\nQue voulez-vous faire ? \n1- Combattre cet adversaire\n2- Contourner cet adversaire et aller ouvrir une autre porte\n3- Afficher les règles du jeu\n4- Quitter la partie")
     users_choix = int(input("1, 2, 3 ou 4: "))
 
 #1 - Combattre cet adversaire
     if users_choix == 1:
-        print("\nForce moyenne des adversaires: ",force_adversaire_finale,"\nNiveau de vie de l’usager: ",niveau_vie,"\nCombat ",numero_combat,": ",nombre_victoires, "vs" ,nombre_defaites)
-        #print(force_adversaire1,",",force_adversaire2,",",force_adversaire3,)
-        print("\nTa force (determiner avec la somme de lancer de deux dés):", score_dé,"et", score_dé2)
+        score_dé1 = random.randrange (1,6)
+        score_dé2 = random.randrange (1,6)
+        score_dé_finale = score_dé1 + score_dé2
+
+        print("\nForce de l'adversaire: ",force_adversaire,"\nNiveau de vie de l’usager: ",niveau_vie,"\nCombat ",numero_combat,": ",nombre_victoires, "vs" ,nombre_defaites)
+        print("\nTa force (determiner avec la somme de lancer de deux dés):", score_dé1,"et", score_dé2)
         print("\nL'adversaire ce lance sur toi, la bataille commence...")
 
-        if score_dé_finale <= force_adversaire_finale:
+        if score_dé_finale <= force_adversaire:
                 print("Le monster ta battu, la bataille ce fini en défaite")
-                niveau_vie = niveau_vie - force_adversaire_finale
+                niveau_vie = niveau_vie - force_adversaire
                 print("\nNiveau de vie de l’usager: ",niveau_vie)
                 nombre_victoires_consecutives = 0
                 numero_combat = numero_combat + 1
@@ -48,9 +45,9 @@ while users_choix != 4 and niveau_vie > 0:
                     print("La partie est terminée, vous avez vaincu",nombre_victoires," monstre(s)")
 
 
-        elif score_dé_finale > force_adversaire_finale:
+        elif score_dé_finale > force_adversaire:
                 print("Tu a battu le monster, la bataille ce fini en victoire")
-                niveau_vie = niveau_vie + force_adversaire_finale
+                niveau_vie = niveau_vie + force_adversaire
                 nombre_victoires_consecutives = nombre_victoires_consecutives + 1
                 numero_combat = numero_combat + 1
                 nombre_victoires = nombre_victoires + 1
@@ -60,20 +57,15 @@ while users_choix != 4 and niveau_vie > 0:
 #2- Contourner cet adversaire et aller ouvrir une autre porte
     elif users_choix == 2:
         niveau_vie -= 1
-        print("\nDes nouveaux monstres vous etes attribuer, or il y a une pénalité de 1 point de vie ")
+        print("\nUn nouveau monstre vous etes attribuer, or il y a une pénalité de 1 point de vie ")
 
 #3- Afficher les règles du jeu
     elif users_choix == 3:
-        print("\nPour réussir un combat, il faut que la valeur de la somme des deux dés lancé soit supérieure à la force moyenne des adversaires. Dans ce cas, le niveau de vie de l’usager est augmenté de la force moyenne des adversaires.")
-        print("Une défaite a lieu lorsque la somme des valeur des dés lancés par l’usager est inférieure ou égale à la force moyenne des adversaires. Dans ce cas, le niveau de vie de l’usager est diminué de la force moyenne des adversaires.")
+        print("\nPour réussir un combat, il faut que la valeur de la somme des deux dés lancé soit supérieure à la force de l'adversaire. Dans ce cas, le niveau de vie de l’usager est augmenté de la force de l'adversaire.")
+        print("Une défaite a lieu lorsque la somme des valeur des dés lancés par l’usager est inférieure ou égale à la force de l'adversaire. Dans ce cas, le niveau de vie de l’usager est diminué de la force de l'adversaire.")
         print("La partie se termine lorsque les points de vie de l’usager tombent sous 0.")
         print("L’usager peut combattre ou éviter chaque adversaire, dans le cas de l’évitement, il y a une pénalité de 1 point de vie.")
 
 #4- Quitter la partie
     elif users_choix == 4:
         print("\nMerci et au revoir...")
-
-
-# to do:
-# - make the forces des adversaires change every round
-# - make the valeur des dés change every round
